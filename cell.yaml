@@ -1,0 +1,241 @@
+# Content cell: an empty cell made from the retired SQLite tables (content, content_calendar, content_series_episodes, content_series_episode_metrics).
+# The domain had no rows when it left the control plane (2026-10-11); new features are built here.
+cell: content
+title: Content
+resources:
+  content:
+    table: content
+    plural: contents
+    filters:
+    - content_type
+    - status
+    - related_niche_id
+    fields:
+      title:
+        type: text
+        required: true
+      slug:
+        type: text
+      content_type:
+        type: enum
+        values:
+        - blog
+        - newsletter
+        - video
+        - podcast
+        - social
+        - course
+        - template
+        - playbook
+        - other
+      summary:
+        type: text
+      body:
+        type: text
+      body_html:
+        type: text
+      status:
+        type: enum
+        values:
+        - idea
+        - draft
+        - review
+        - published
+        - archived
+        default: idea
+      published_at:
+        type: timestamp
+      platforms:
+        type: text
+      canonical_url:
+        type: text
+      views:
+        type: int
+        default: 0
+      shares:
+        type: int
+        default: 0
+      leads_generated:
+        type: int
+        default: 0
+      meta_title:
+        type: text
+      meta_description:
+        type: text
+      keywords:
+        type: text
+      related_skill_ids:
+        type: text
+      related_niche_id:
+        type: bigint
+      notes:
+        type: text
+  content-calendar:
+    table: content_calendar
+    plural: content-calendars
+    filters:
+    - content_type
+    - status
+    - has_cta
+    - repurpose_from
+    - related_project_id
+    - related_content_id
+    fields:
+      title:
+        type: text
+        required: true
+      content_type:
+        type: enum
+        values:
+        - blog
+        - newsletter
+        - video
+        - podcast
+        - social
+        - thread
+        - carousel
+        - course
+        - template
+        - other
+        default: blog
+      topic:
+        type: text
+      angle:
+        type: text
+      target_audience:
+        type: text
+      platform:
+        type: text
+      scheduled_date:
+        type: date
+      published_at:
+        type: timestamp
+      status:
+        type: enum
+        values:
+        - idea
+        - researching
+        - outlining
+        - drafting
+        - review
+        - scheduled
+        - published
+        - repurposed
+        - killed
+        default: idea
+      priority:
+        type: int
+        default: 3
+      content_body:
+        type: text
+      word_count:
+        type: int
+        default: 0
+      has_cta:
+        type: bool
+        default: false
+      repurpose_from:
+        type: ref
+        to: content-calendar
+      repurpose_to:
+        type: text
+      distribution_channels:
+        type: text
+      views:
+        type: int
+        default: 0
+      engagement:
+        type: int
+        default: 0
+      leads_generated:
+        type: int
+        default: 0
+      related_project_id:
+        type: bigint
+      related_skill_ids:
+        type: text
+      related_content_id:
+        type: ref
+        to: content
+      notes:
+        type: text
+  content-series-episode:
+    table: content_series_episodes
+    plural: content-series-episodes
+    filters:
+    - status
+    fields:
+      series_slug:
+        type: text
+        required: true
+      day_number:
+        type: int
+        required: true
+      platform:
+        type: text
+        default: tiktok
+      account_handle:
+        type: text
+        required: true
+      title:
+        type: text
+      topic:
+        type: text
+      script_path:
+        type: text
+      planned_date:
+        type: date
+      status:
+        type: enum
+        values:
+        - idea
+        - drafting
+        - ready_to_record
+        - recorded
+        - edited
+        - approved
+        - published_user_confirmed
+        - published_verified
+        - metrics_reviewed
+        default: idea
+      recorded_at:
+        type: timestamp
+      published_at:
+        type: timestamp
+      public_url:
+        type: text
+      evidence_source:
+        type: text
+      notes:
+        type: text
+  content-series-episode-metric:
+    table: content_series_episode_metrics
+    plural: content-series-episode-metrics
+    filters:
+    - episode_id
+    fields:
+      episode_id:
+        type: ref
+        to: content-series-episode
+        required: true
+      views:
+        type: int
+      likes:
+        type: int
+      comments:
+        type: int
+      shares:
+        type: int
+      saves:
+        type: int
+      profile_views:
+        type: int
+      followers:
+        type: int
+      captured_at:
+        type: timestamp
+        required: true
+      source:
+        type: text
+        default: manual
+
