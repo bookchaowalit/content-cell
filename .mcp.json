@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "content": {
+      "command": ".venv/bin/content-mcp",
+      "args": []
+    }
+  }
+}
