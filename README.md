@@ -1,5 +1,4 @@
-# content-cell
-
+# life-content-api
 The Content cell: its own API (Railway, serverless) and its own Neon
 database, described by `cell.yaml` and served by the code in `src/cellkit/`, which
 this repository owns. It
@@ -8,8 +7,8 @@ HTTP with the caller's token.
 
 | | |
 |---|---|
-| API | Railway project `content-cell`, service `content-api` (Serverless) |
-| Data | Neon project `content-cell`, database `content` |
+| API | Railway project `life-content-api`, service `content-api` (Serverless) |
+| Data | Neon project `life-content-api`, database `content` |
 | Registry | solo-empire `repository-catalog/registries/online-systems.yaml` (`content`) |
 
 ## API
